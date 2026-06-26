@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shyam Raj — Geoinformatics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B2A2F;
+    --green:#3D6B4F;
+    --green-light:#6E9C7B;
+    --sand:#C9B896;
+    --paper:#F5F1E8;
+    --clay:#A85C40;
+    --line:rgba(27,42,47,0.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+  }
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;}
+  a{color:inherit;}
+  .wrap{max-width:880px;margin:0 auto;padding:0 32px;}
+
+  /* HERO */
+  header{
+    background:var(--ink);
+    color:var(--paper);
+    position:relative;
+    overflow:hidden;
+    padding:90px 0 70px;
+  }
+  header svg.contours{
+    position:absolute; inset:0; width:100%; height:100%;
+    opacity:0.18; pointer-events:none;
+  }
+  header .inner{position:relative; z-index:1;}
+  .eyebrow{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:13px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--green-light); font-weight:600; margin-bottom:18px;
+  }
+  header h1{font-size:48px; font-weight:700; margin-bottom:10px;}
+  header .role{font-size:18px; color:var(--sand); font-weight:500;}
+  .coords{
+    margin-top:28px; display:flex; gap:28px; flex-wrap:wrap;
+    font-family:'Space Grotesk',sans-serif; font-size:13px; color:var(--green-light);
+  }
+  .coords span strong{color:var(--paper); font-weight:600;}
+
+  /* NAV */
+  nav{
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    position:sticky; top:0; z-index:10;
+  }
+  nav .inner{display:flex; gap:28px; padding:14px 0; font-size:14px; font-weight:500;}
+  nav a{text-decoration:none; color:var(--ink); opacity:0.7; transition:opacity .15s;}
+  nav a:hover{opacity:1; color:var(--green);}
+
+  section{padding:64px 0;}
+  section + section{border-top:1px solid var(--line);}
+  h2{font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:var(--clay); font-weight:600; margin-bottom:24px;}
+  .lede{font-size:16px; max-width:620px;}
+
+  /* SKILLS — legend style */
+  .legend{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:24px; margin-top:8px;}
+  .legend-group h3{font-size:15px; font-weight:600; margin-bottom:10px;}
+  .legend-group ul{list-style:none; font-size:14px;}
+  .legend-group li{padding:5px 0 5px 18px; position:relative; border-bottom:1px dashed var(--line);}
+  .legend-group li:last-child{border-bottom:none;}
+  .legend-group li::before{
+    content:''; position:absolute; left:0; top:13px; width:9px; height:9px; border-radius:50%;
+    background:var(--green);
+  }
+  .legend-group.tools li::before{background:var(--clay);}
+
+  /* PROJECTS — tile cards */
+  .tiles{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; margin-top:8px;}
+  .tile{
+    background:#fff; border:1px solid var(--line); border-radius:6px; padding:22px;
+    position:relative;
+  }
+  .tile::before{
+    content:''; position:absolute; top:0; left:0; width:100%; height:4px;
+    background:repeating-linear-gradient(90deg, var(--green) 0 10px, var(--sand) 10px 20px);
+    border-radius:6px 6px 0 0;
+  }
+  .tile h3{font-size:16px; font-weight:600; margin:10px 0 8px;}
+  .tile p{font-size:14px; color:#3a4548;}
+  .tag-row{display:flex; gap:6px; flex-wrap:wrap; margin-top:12px;}
+  .tag{
+    font-size:11px; font-family:'Space Grotesk',sans-serif; font-weight:600;
+    letter-spacing:0.03em; text-transform:uppercase;
+    background:var(--paper); border:1px solid var(--line); border-radius:3px;
+    padding:3px 8px; color:var(--green);
+  }
+
+  /* EDUCATION — timeline */
+  .timeline{border-left:2px solid var(--sand); margin-left:6px; padding-left:24px;}
+  .tl-item{position:relative; margin-bottom:26px;}
+  .tl-item::before{
+    content:''; position:absolute; left:-31px; top:4px; width:11px; height:11px;
+    border-radius:50%; background:var(--clay); border:2px solid var(--paper);
+  }
+  .tl-item h3{font-size:16px; font-weight:600;}
+  .tl-meta{font-size:13px; color:var(--green); font-weight:500; margin:2px 0 6px;}
+  .tl-item p{font-size:14px; color:#3a4548;}
+
+  /* CONTACT */
+  footer{background:var(--ink); color:var(--paper); padding:50px 0;}
+  footer h2{color:var(--green-light);}
+  .contact-row{display:flex; gap:32px; flex-wrap:wrap; font-size:15px; margin-top:10px;}
+  .contact-row a{text-decoration:none; border-bottom:1px solid var(--green-light); padding-bottom:1px;}
+  .note{
+    margin-top:40px; padding-top:20px; border-top:1px solid rgba(245,241,232,0.15);
+    font-size:12px; color:var(--green-light); opacity:0.8;
+  }
+
+  @media (max-width:600px){
+    header{padding:60px 0 50px;}
+    header h1{font-size:34px;}
+    nav .inner{gap:16px; overflow-x:auto;}
+    .wrap{padding:0 20px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <svg class="contours" viewBox="0 0 800 400" preserveAspectRatio="none">
+    <path d="M-20,60 Q200,20 400,70 T820,40" stroke="#C9B896" stroke-width="1.5" fill="none"/>
+    <path d="M-20,110 Q220,70 420,120 T820,90" stroke="#C9B896" stroke-width="1.5" fill="none"/>
+    <path d="M-20,160 Q240,120 440,170 T820,140" stroke="#C9B896" stroke-width="1.5" fill="none"/>
+    <path d="M-20,210 Q260,170 460,220 T820,190" stroke="#C9B896" stroke-width="1.5" fill="none"/>
+    <path d="M-20,260 Q280,220 480,270 T820,240" stroke="#C9B896" stroke-width="1.5" fill="none"/>
+    <path d="M-20,310 Q300,270 500,320 T820,290" stroke="#C9B896" stroke-width="1.5" fill="none"/>
+    <path d="M-20,360 Q320,320 520,370 T820,340" stroke="#C9B896" stroke-width="1.5" fill="none"/>
+  </svg>
+  <div class="wrap inner">
+    <div class="eyebrow">Geoinformatics &middot; Remote Sensing &middot; GIS</div>
+    <h1>Shyam Raj</h1>
+    <div class="role">M.Tech Student, Geoinformatics</div>
+    <div class="coords">
+      <span>LAT <strong>26.4499&deg; N</strong></span>
+      <span>LON <strong>80.3319&deg; E</strong></span>
+      <span>BASE <strong>Kanpur, India</strong></span>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="wrap inner">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section id="about">
+  <div class="wrap">
+    <h2>About</h2>
+    <p class="lede">
+      Replace this with your own summary — two or three sentences on your background, the part of geoinformatics
+      you focus on (e.g. remote sensing, GIS analysis, geospatial programming, photogrammetry, LiDAR/point clouds),
+      and what kind of work or research you're looking for next.
+    </p>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2>Skills</h2>
+    <div class="legend">
+      <div class="legend-group">
+        <h3>Geospatial</h3>
+        <ul>
+          <li>GIS analysis (QGIS, ArcGIS)</li>
+          <li>Remote sensing &amp; image classification</li>
+          <li>Spatial data modelling</li>
+          <li>Cartography &amp; map design</li>
+        </ul>
+      </div>
+      <div class="legend-group tools">
+        <h3>Programming &amp; tools</h3>
+        <ul>
+          <li>Python (GDAL, Rasterio, GeoPandas)</li>
+          <li>SQL / PostGIS</li>
+          <li>Google Earth Engine</li>
+          <li>Git, QGIS Python console</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Projects</h2>
+    <div class="tiles">
+      <div class="tile">
+        <h3>Land use / land cover change detection</h3>
+        <p>Placeholder — describe the study area, satellite data used, classification method, and key result.</p>
+        <div class="tag-row"><span class="tag">Remote sensing</span><span class="tag">Python</span></div>
+      </div>
+      <div class="tile">
+        <h3>Flood susceptibility mapping</h3>
+        <p>Placeholder — describe the GIS layers combined, the model (e.g. AHP, ML), and the output map.</p>
+        <div class="tag-row"><span class="tag">GIS</span><span class="tag">QGIS</span></div>
+      </div>
+      <div class="tile">
+        <h3>Web map / dashboard</h3>
+        <p>Placeholder — a short note on a web-GIS tool, dashboard, or visualization you built.</p>
+        <div class="tag-row"><span class="tag">Web GIS</span><span class="tag">Leaflet</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <h2>Education</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <h3>M.Tech, Geoinformatics</h3>
+        <div class="tl-meta">Your Institute Name &middot; 2024 &ndash; 2026 (edit dates)</div>
+        <p>Add thesis title / area of specialization here.</p>
+      </div>
+      <div class="tl-item">
+        <h3>B.Tech / B.Sc, [Your Discipline]</h3>
+        <div class="tl-meta">Your Institute Name &middot; [Years]</div>
+        <p>Optional one-line note on relevant coursework or final-year project.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Contact</h2>
+    <div class="contact-row">
+      <a href="mailto:shyam.raj@example.com">shyam.raj@example.com</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">GitHub</a>
+    </div>
+    <div class="note">
+      Sample template — placeholder content. Edit the email, links, project descriptions, and dates before using.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
