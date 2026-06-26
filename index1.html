@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shyam Raj — Geoinformatics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B2A2F;
+    --green:#3D6B4F;
+    --green-light:#6E9C7B;
+    --sand:#C9B896;
+    --paper:#F5F1E8;
+    --clay:#A85C40;
+    --line:rgba(27,42,47,0.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+  }
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;}
+  a{color:inherit;}
+  .wrap{max-width:880px;margin:0 auto;padding:0 32px;}
+
+  /* HERO */
+  header{
+    background:var(--ink);
+    color:var(--paper);
+    position:relative;
+    overflow:hidden;
+    padding:90px 0 70px;
+  }
+  header svg.contours{
+    position:absolute; inset:0; width:100%; height:100%;
+    opacity:0.18; pointer-events:none;
+  }
+  header .inner{position:relative; z-index:1;}
+  .eyebrow{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:13px; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--green-light); font-weight:600; margin-bottom:18px;
+  }
+  header h1{font-size:48px; font-weight:700; margin-bottom:10px;}
+  header .role{font-size:18px; color:var(--sand); font-weight:500;}
+  .coords{
+    margin-top:28px; display:flex; gap:28px; flex-wrap:wrap;
+    font-family:'Space Grotesk',sans-serif; font-size:13px; color:var(--green-light);
+  }
+  .coords span strong{color:var(--paper); font-weight:600;}
+
+  /* NAV */
+  nav{
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    position:sticky; top:0; z-index:10;
+  }
+  nav .inner{display:flex; gap:28px; padding:14px 0; font-size:14px; font-weight:500;}
+  nav a{text-decoration:none; color:var(--ink); opacity:0.7; transition:opacity .15s;}
+  nav a:hover{opacity:1; color:var(--green);}
+
+  section{padding:64px 0;}
+  section + section{border-top:1px solid var(--line);}
+  h2{font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:var(--clay); font-weight:600; margin-bottom:24px;}
+  .lede{font-size:16px; max-width:620px;}
+
+  /* SKILLS — legend style */
+  .legend{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:24px; margin-top:8px;}
+  .legend-group h3{font-size:15px; font-weight:600; margin-bottom:10px;}
+  .legend-group ul{list-style:none; font-size:14px;}
+  .legend-group li{padding:5px 0 5px 18px; position:relative; border-bottom:1px dashed var(--line);}
+  .legend-group li:last-child{border-bottom:none;}
+  .legend-group li::before{
+    content:''; position:absolute; left:0; top:13px; width:9px; height:9px; border-radius:50%;
+    background:var(--green);
+  }
+  .legend-group.tools li::before{background:var(--clay);}
+
+  /* PROJECTS — tile cards */
+  .tiles{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; margin-top:8px;}
+  .tile{
+    background:#fff; border:1px solid var(--line); border-radius:6px; padding:22px;
+    position:relative;
+  }
+  .tile::before{
+    content:''; position:absolute; top:0; left:0; width:100%; height:4px;
+    background:repeating-linear-gradient(90deg, var(--green) 0 10px, var(--sand) 10px 20px);
+    border-radius:6px 6px 0 0;
+  }
+  .tile h3{font-size:16px; font-weight:600; margin:10px 0 8px;}
+  .tile p{font-size:14px; color:#3a4548;}
+  .tag-row{display:flex; gap:6px; flex-wrap:wrap; margin-top:12px;}
+  .tag{
+    font-size:11px; font-family:'Space Grotesk',sans-serif; font-weight:600;
+    letter-spacing:0.03em; text-transform:uppercase;
+    background:var(--paper); border:1px solid var(--line); border-radius:3px;
+    padding:3px 8px; color:var(--green);
+  }
+
+  /* EDUCATION — timeline */
+  .timeline{border-left:2px solid var(--sand); margin-left:6px; padding-left:24px;}
+  .tl-item{position:relative; margin-bottom:26px;}
+  .tl-item::before{
+    content:''; position:absolute; left:-31px; top:4px; width:11px; height:11px;
+    border-radius:50%; background:var(--clay); border:2px solid var(--paper);
+  }
+  .tl-item h3{font-size:16px; font-weight:600;}
+  .tl-meta{font-size:13px; color:var(--green); font-weight:500; margin:2px 0 6px;}
+  .tl-item p{font-size:14px; color:#3a4548;}
+
+  /* CONTACT */
+  footer{background:var(--ink); color:var(--paper); padding:50px 0;}
+  footer h2{color:var(--green-light);}
+  .contact-row{display:flex; gap:32px; flex-wrap:wrap; font-size:15px; margin-top:10px;}
+  .contact-row a{text-decoration:none; border-bottom:1px solid var(--green-light); padding-bottom:1px;}
+  .note{
+    margin-top:40px; padding-top:20px; border-top:1px solid rgba(245,241,232,0.15);
+    font-size:12px; color:var(--green-light); opacity:0.8;
+  }
+
+  @media (max-width:600px){
+    header{padding:60px 0 50px;}
+    header h1{font-size:34px;}
+    nav .inner{gap:16px; overflow-x:auto;}
+    .wrap{padding:0 20px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <svg class="contours" viewBox="0 0 800 400" preserveAspectRatio="none">
+    <path d="M-20,60 Q200,20 400,70 T820,40" stroke="#C9B896" stroke-width="1.5" fill="none"/>
+    <path d="M-20,110 Q220,70 420,120 T820,90" stroke="#C9B896" stroke-width="1.5" fill="none"/>
+    <path d="M-20,160 Q240,120 440,170 T820,140" stroke="#C9B896" stroke-width="1.5" fill="none"/>
+    <path d="M-20,210 Q260,170 460,220 T820,190" stroke="#C9B896" stroke-width="1.5" fill="none"/>
+    <path d="M-20,260 Q280,220 480,270 T820,240" stroke="#C9B896" stroke-width="1.5" fill="none"/>
+    <path d="M-20,310 Q300,270 500,320 T820,290" stroke="#C9B896" stroke-width="1.5" fill="none"/>
+    <path d="M-20,360 Q320,320 520,370 T820,340" stroke="#C9B896" stroke-width="1.5" fill="none"/>
+  </svg>
+  <div class="wrap inner">
+    <div class="eyebrow">Geoinformatics &middot; IIT Kanpur</div>
+    <h1>Shyam Raj</h1>
+    <div class="role">M.Tech, Geoinformatics &middot; Institute Secretary &middot; Accounts Secretary</div>
+    <div class="coords">
+      <span>LAT <strong>26.4499&deg; N</strong></span>
+      <span>LON <strong>80.3319&deg; E</strong></span>
+      <span>BASE <strong>Kanpur, Uttar Pradesh, India</strong></span>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="wrap inner">
+    <a href="#about">About</a>
+    <a href="#skills">Focus</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section id="about">
+  <div class="wrap">
+    <h2>About</h2>
+    <p class="lede">
+      Postgraduate student in Geoinformatics at IIT Kanpur with a focus on geospatial technologies, data
+      analysis, and real-world problem solving. Academic interests centre on geodesy, LiDAR data processing,
+      coordinate systems, and spatial data accuracy, applying analytical and computational methods to mapping,
+      surveying, and environmental monitoring problems. Also explores software tools and automation platforms
+      that improve productivity and scalability. Looking to collaborate on projects, research, and internships
+      in geospatial science and remote sensing.
+    </p>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2>Areas of focus</h2>
+    <div class="legend">
+      <div class="legend-group">
+        <h3>Geospatial interests</h3>
+        <ul>
+          <li>Geodesy &amp; coordinate systems</li>
+          <li>LiDAR data processing</li>
+          <li>Spatial data accuracy</li>
+          <li>Mapping &amp; surveying</li>
+        </ul>
+      </div>
+      <div class="legend-group tools">
+        <h3>Applied to</h3>
+        <ul>
+          <li>Environmental monitoring</li>
+          <li>Remote sensing</li>
+          <li>Automation &amp; digital workflows</li>
+        </ul>
+      </div>
+    </div>
+    <p style="font-size:13px; color:#6b6b66; margin-top:14px;">
+      Pulled from your profile summary, not a verified skills list. Replace with specific tools (e.g. QGIS,
+      Python, GDAL, PostGIS, Google Earth Engine) once you've confirmed which you want listed.
+    </p>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Projects</h2>
+    <p class="lede" style="margin-bottom:16px;">
+      No projects were listed in your profile data — this section is a placeholder. Add 2-3 real projects
+      (thesis work, coursework, internship deliverables) with a one-line description and the tools used.
+    </p>
+    <div class="tiles">
+      <div class="tile">
+        <h3>[Project title]</h3>
+        <p>[One to two sentence description — problem, data, method, outcome.]</p>
+        <div class="tag-row"><span class="tag">[Tool]</span><span class="tag">[Tool]</span></div>
+      </div>
+      <div class="tile">
+        <h3>[Project title]</h3>
+        <p>[One to two sentence description — problem, data, method, outcome.]</p>
+        <div class="tag-row"><span class="tag">[Tool]</span><span class="tag">[Tool]</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <h2>Experience</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <h3>Institute Secretary, Career Development &amp; International Relations</h3>
+        <div class="tl-meta">Academics and Career Council, IIT Kanpur &middot; May 2026 &ndash; Present</div>
+        <p>Institute-level student council role.</p>
+      </div>
+      <div class="tl-item">
+        <h3>Secretary, International Relations Wing</h3>
+        <div class="tl-meta">Academics and Career Council, IIT Kanpur &middot; October 2025 &ndash; May 2026</div>
+        <p>International relations portfolio within the council.</p>
+      </div>
+      <div class="tl-item">
+        <h3>Accounts Secretary, Hall-14</h3>
+        <div class="tl-meta">Indian Institute of Technology, Kanpur &middot; September 2025 &ndash; Present</div>
+        <p>Hostel-level accounts and finance responsibility.</p>
+      </div>
+      <div class="tl-item">
+        <h3>Sales &amp; Marketing Intern</h3>
+        <div class="tl-meta">Godrej Agrovet Limited &middot; December 2023 &ndash; February 2024 &middot; Nadia, West Bengal</div>
+        <p>Three-month internship in sales and marketing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <h2>Education</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <h3>M.Tech, Geoinformatics</h3>
+        <div class="tl-meta">Indian Institute of Technology, Kanpur &middot; From July 2025</div>
+        <p>No end date listed on your profile — worth checking this is current and correct.</p>
+      </div>
+      <div class="tl-item">
+        <h3>B.Tech, Agricultural Engineering</h3>
+        <div class="tl-meta">Bidhan Chandra Krishi Viswavidyalaya &middot; September 2021 &ndash; June 2025</div>
+        <p></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="wrap">
+    <h2>Certifications</h2>
+    <div class="legend">
+      <div class="legend-group">
+        <ul>
+          <li>Training on Soil &amp; Water Conservation Engineering</li>
+          <li>Academic-level training course on Agricultural Machinery and Tractors</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Contact</h2>
+    <div class="contact-row">
+      <a href="mailto:shyamraj25@zohomail.in">shyamraj25@zohomail.in</a>
+      <a href="https://www.linkedin.com/in/shyamraj-7a2366327">LinkedIn</a>
+    </div>
+    <p style="font-size:13px; color:var(--green-light); margin-top:18px; opacity:0.85;">
+      Languages: English, Hindi (professional working), Bengali (limited working)
+    </p>
+    <div class="note">
+      Built from your LinkedIn profile export. Projects and detailed skills are placeholders — fill in
+      real project work to make this page complete. Double-check the M.Tech start date against your B.Tech
+      end date, since they currently overlap by a couple of months in the source data.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
